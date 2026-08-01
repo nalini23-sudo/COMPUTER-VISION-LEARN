@@ -1,0 +1,11 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("image.jpg")
+
+bright = cv2.add(img, np.ones(img.shape, dtype="uint8")*50)
+
+cv2.imshow("Bright Image", bright)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
