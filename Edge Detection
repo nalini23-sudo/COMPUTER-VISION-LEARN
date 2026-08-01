@@ -1,0 +1,28 @@
+Edge detection is used to find the boundaries of objects in an image by detecting sudden changes in pixel intensity.
+
+Commonly used methods:
+
+1.Sobel Edge Detection
+    Detects edges in X and Y directions.
+
+
+2.Canny Edge Detection
+
+3.Laplacian Edge Detection
+    Detects edges using second-order derivatives.
+
+Edge Detection Pipeline:
+
+    Input Image
+     |
+     ↓
+Convert to Grayscale
+     |
+     ↓
+Apply Blur (optional)
+     |
+     ↓
+Edge Detection
+     |
+     ↓
+Display Edges
