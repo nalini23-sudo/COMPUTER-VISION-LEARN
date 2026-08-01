@@ -1,0 +1,12 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("image.jpg")
+
+# Multiply pixel values
+result = cv2.multiply(img, np.array([2]))
+
+cv2.imshow("Multiplication", result)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
