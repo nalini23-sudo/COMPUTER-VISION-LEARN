@@ -1,0 +1,12 @@
+
+import cv2
+import numpy as np
+
+img = cv2.imread("image.jpg")
+
+result = cv2.divide(img, np.array([2]))
+
+cv2.imshow("Division", result)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
