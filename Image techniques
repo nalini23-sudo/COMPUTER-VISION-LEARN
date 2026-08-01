@@ -1,0 +1,160 @@
+IMAGE THRESHOLDING
+
+import cv2
+
+# Read image in grayscale
+image = cv2.imread("NASA.jpg", 0)
+
+# Apply binary threshold
+ret, thresh = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+
+# Save output image
+cv2.imwrite("threshold_image.jpg", thresh)
+
+# Display images
+cv2.imshow("Original Image", image)
+cv2.imshow("Threshold Image", thresh)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+DRAW SHAPES
+
+import cv2
+import numpy as np
+
+# Create a blank black image
+image = np.zeros((500, 500, 3), dtype="uint8")
+
+# Draw a line
+cv2.line(image, (50, 50), (450, 50), (255, 0, 0), 3)
+
+# Draw a rectangle
+cv2.rectangle(image, (50, 100), (200, 250), (0, 255, 0), 3)
+
+# Draw a circle
+cv2.circle(image, (350, 175), 60, (0, 0, 255), 3)
+
+# Draw an ellipse
+cv2.ellipse(image, (250, 350), (100, 50), 0, 0, 360, (255, 255, 0), 3)
+
+# Display image
+cv2.imshow("Shapes", image)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+ANNOTATING IMAGES
+
+import cv2
+
+# Read image
+image = cv2.imread("NASA.jpg")
+
+# Add text
+cv2.putText(image, "OpenCV", (50, 50),
+            cv2.FONT_HERSHEY_SIMPLEX, 1,
+            (0, 255, 0), 2)
+
+# Draw a line
+cv2.line(image, (50, 100), (300, 100), (255, 0, 0), 2)
+
+# Draw a rectangle
+cv2.rectangle(image, (50, 150), (250, 300), (0, 0, 255), 2)
+
+# Draw a circle
+cv2.circle(image, (400, 200), 50, (255, 255, 0), 2)
+
+# Display image
+cv2.imshow("Annotated Image", image)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+HOROZONTAL CONCATINATION
+
+import cv2
+
+# Read two images
+img1 = cv2.imread("image1.jpg")
+img2 = cv2.imread("image2.jpg")
+
+# Resize both images to the same size
+img1 = cv2.resize(img1, (300, 300))
+img2 = cv2.resize(img2, (300, 300))
+
+# Concatenate horizontally
+result = cv2.hconcat([img1, img2])
+
+# Display the result
+cv2.imshow("Horizontal Concatenation", result)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+USING NUMPY:
+import cv2
+import numpy as np
+
+img1 = cv2.imread("image1.jpg")
+img2 = cv2.imread("image2.jpg")
+
+img1 = cv2.resize(img1, (300, 300))
+img2 = cv2.resize(img2, (300, 300))
+
+result = np.hstack((img1, img2))
+
+cv2.imshow("Horizontal Concatenation", result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+VERTICAL CONCATINATION
+import cv2
+import numpy as np
+
+img1 = cv2.imread("image1.jpg")
+img2 = cv2.imread("image2.jpg")
+
+img1 = cv2.resize(img1, (300, 300))
+img2 = cv2.resize(img2, (300, 300))
+
+result = np.vstack((img1, img2))
+
+cv2.imshow("Vertical Concatenation", result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+CUSTOM GRID OF IMAGES
+import cv2
+
+# Read images
+img1 = cv2.imread("image1.jpg")
+img2 = cv2.imread("image2.jpg")
+img3 = cv2.imread("image3.jpg")
+img4 = cv2.imread("image4.jpg")
+
+# Resize all images to the same size
+size = (300, 300)
+img1 = cv2.resize(img1, size)
+img2 = cv2.resize(img2, size)
+img3 = cv2.resize(img3, size)
+img4 = cv2.resize(img4, size)
+
+# Create top and bottom rows
+top = cv2.hconcat([img1, img2])
+bottom = cv2.hconcat([img3, img4])
+
+# Create 2x2 grid
+grid = cv2.vconcat([top, bottom])
+
+# Display grid
+cv2.imshow("Custom Grid", grid)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
