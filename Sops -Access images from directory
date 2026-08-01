@@ -1,0 +1,81 @@
+1. Access a single image from a directory
+
+import cv2
+
+# Image path
+path = "images/sample.jpg"
+
+# Read image
+img = cv2.imread(path)
+
+# Display image
+cv2.imshow("Image", img)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+2. Access all images from a directory
+
+import cv2
+import os
+
+# Directory path
+folder = "images"
+
+# Get all files
+files = os.listdir(folder)
+
+for file in files:
+    # Create complete path
+    img_path = os.path.join(folder, file)
+
+    # Read image
+    img = cv2.imread(img_path)
+
+    # Display image
+    cv2.imshow("Image", img)
+
+    cv2.waitKey(1000)   # Display each image for 1 second
+
+cv2.destroyAllWindows()
+
+
+3. Access only image files (.jpg, .png)
+import cv2
+import os
+
+folder = "images"
+
+for file in os.listdir(folder):
+
+    if file.endswith((".jpg", ".png", ".jpeg")):
+
+        path = os.path.join(folder, file)
+
+        img = cv2.imread(path)
+
+        cv2.imshow(file, img)
+
+        cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+4. Read images using glob (simple method)
+import cv2
+import glob
+
+images = glob.glob("images/*.jpg")
+
+for img_path in images:
+
+    img = cv2.imread(img_path)
+
+    cv2.imshow("Image", img)
+
+    cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+
+
