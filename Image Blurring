@@ -1,0 +1,26 @@
+Image Blurring in OpenCV
+
+Image blurring (smoothing) is used to reduce noise and remove unwanted details from an image.
+OpenCV provides different blur methods:
+
+1. Average Blur (Mean Blur):
+    It replaces each pixel value with the average value of neighboring pixels.
+
+2. Gaussian Blur:
+    Used in computer vision for noise reduction.
+
+3. Median Blur:
+    Best for removing salt and pepper noise.
+
+4. Bilateral Filter:
+     Keeps edges while smoothing.
+
+
+COMPARISON
+
+| Method           | Function                | Use                        |
+| ---------------- | ----------------------- | -------------------------- |
+| Average Blur     | `cv2.blur()`            | Simple smoothing           |
+| Gaussian Blur    | `cv2.GaussianBlur()`    | Noise reduction            |
+| Median Blur      | `cv2.medianBlur()`      | Remove salt & pepper noise |
+| Bilateral Filter | `cv2.bilateralFilter()` | Smooth + preserve edges    |
