@@ -1,0 +1,11 @@
+AND Operation
+     result = cv2.bitwise_and(img1, img2)
+
+OR Operation
+     result = cv2.bitwise_or(img1, img2)
+
+XOR Operation
+     result = cv2.bitwise_xor(img1, img2)
+
+NOT Operation
+     result = cv2.bitwise_not(img)
