@@ -1,0 +1,22 @@
+Image Arithmetic Operations in OpenCV
+
+Image arithmetic means performing mathematical operations between images or between an image and a constant value.
+
+Common operations:
+
+Image Addition
+Image Subtraction
+Image Multiplication
+Image Division
+
+1. Image Addition
+      Used to combine two images or increase brightness.
+
+2. Image Subtraction
+      Used to find differences between two images.
+
+3. Image Multiplication
+     Used to increase brightness or apply masks.
+
+4. Image Division
+      Used for normalization and image enhancement.
