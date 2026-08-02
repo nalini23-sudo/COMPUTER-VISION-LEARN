@@ -1,0 +1,46 @@
+SURF:
+   Speeded-Up Robust Features
+   A method to find features in images
+
+How does Surf Work:
+1. Interest Point Detection (Scale Space Extrema)
+SURF detects corners and blob-like regions using the Hessian matrix.
+It uses box filters and integral images for fast computation.
+Different scales are created by increasing the filter size (not resizing the image).
+Strong local maxima are selected as candidate keypoints.
+
+2. Keypoint Localization
+Removes weak and unstable keypoints.
+Keeps only the strongest local maxima using non-maximum suppression.
+3. Orientation Assignment
+Computes Haar wavelet responses around each keypoint.
+Assigns the dominant orientation.
+Makes SURF rotation invariant.
+
+4. Keypoint Descriptor
+Divides the neighborhood into 4 × 4 = 16 subregions.
+Computes dx, dy, |dx|, |dy| for each.
+Forms a 64-dimensional descriptor.
+
+5. Keypoint Matching
+Compares descriptors between two images using Euclidean distance.
+The closest descriptors are matched to identify the same object.
+Easy Mnemonic
+
+Detect → Localize → Orient → Describe → Match (DLODM)
+
+
+CODE:
+import cv2
+
+img = cv2.imread("image.jpg", 0)
+
+surf = cv2.xfeatures2d.SURF_create(hessianThreshold=400)
+
+keypoints, descriptors = surf.detectAndCompute(img, None)
+
+output = cv2.drawKeypoints(img, keypoints, None)
+
+cv2.imshow("SURF Keypoints", output)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
