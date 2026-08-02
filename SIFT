@@ -1,0 +1,116 @@
+Scale Invarian Feature Transform
+   A mathod to find features in images 
+
+Need:
+  Feature detection
+  Robust
+
+How does SIFT WORK:
+   
+Step 1: Scale Space Extrema Detection
+Build a Gaussian Pyramid by blurring the image at different scales.
+Compute the Difference of Gaussian (DoG) images.
+Detect local maxima and minima as candidate keypoints.
+
+Step 2: Keypoint Localization
+Remove low-contrast and edge keypoints.
+Keep only strong and stable keypoints.
+
+Step 3: Orientation Assignment
+Calculate gradient magnitude and gradient direction around each keypoint.
+Assign the dominant orientation.
+Makes SIFT rotation invariant.
+
+Step 4: Keypoint Descriptor
+Take a 16 × 16 neighborhood around the keypoint.
+Divide it into 4 × 4 = 16 cells.
+Compute an 8-bin orientation histogram for each cell.
+Generate a 128-dimensional descriptor.
+
+Step 5: Keypoint Matching
+Compare descriptors from two images using Euclidean distance.
+Apply Lowe's ratio test to remove incorrect matches.
+Match the remaining keypoints.
+
+Flow Diagram
+Input Image
+      ↓
+1. Scale Space Extrema Detection
+      ↓
+2. Keypoint Localization
+      ↓
+3. Orientation Assignment
+      ↓
+4. Keypoint Descriptor (128-D)
+      ↓
+5. Keypoint Matching
+      ↓
+Object Recognition / Image Matching
+
+CODE:
+SIFT FUTURE DETECTION
+
+  import cv2
+
+# Read image in grayscale
+img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
+
+# Create SIFT object
+sift = cv2.SIFT_create()
+
+# Detect keypoints and compute descriptors
+keypoints, descriptors = sift.detectAndCompute(img, None)
+
+# Draw keypoints
+output = cv2.drawKeypoints(
+    img,
+    keypoints,
+    None,
+    flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+)
+
+# Display result
+cv2.imshow("SIFT Keypoints", output)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# Print results
+print("Number of Keypoints:", len(keypoints))
+print("Descriptor Shape:", descriptors.shape)
+
+FEATURE MAPPING BETWWEN TWO IMAGES:
+
+import cv2
+
+# Read two images
+img1 = cv2.imread("image1.jpg", 0)
+img2 = cv2.imread("image2.jpg", 0)
+
+# Create SIFT detector
+sift = cv2.SIFT_create()
+
+# Detect keypoints and descriptors
+kp1, des1 = sift.detectAndCompute(img1, None)
+kp2, des2 = sift.detectAndCompute(img2, None)
+
+# Brute Force Matcher
+bf = cv2.BFMatcher()
+
+# Match descriptors
+matches = bf.match(des1, des2)
+
+# Sort matches by distance
+matches = sorted(matches, key=lambda x: x.distance)
+
+# Draw first 50 matches
+result = cv2.drawMatches(
+    img1, kp1,
+    img2, kp2,
+    matches[:50],
+    None,
+    flags=2
+)
+
+cv2.imshow("SIFT Matching", result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
