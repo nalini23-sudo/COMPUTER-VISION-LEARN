@@ -1,0 +1,104 @@
+Oriented Fast and Rotated BRIEF
+Feature detection method
+
+NEED:
+feature detect
+efficient
+license restriction on SIFT/SURF
+
+HoOW DOES ORB WORK:
+
+1. FAST Keypoint Detection
+Uses the FAST (Features from Accelerated Segment Test) algorithm.
+Detects corners quickly.
+Candidate keypoints are selected..
+
+2. Keypoint Localization
+Removes weak and duplicate keypoints.
+Keeps only strong and stable keypoints using non-maximum suppression.
+
+
+3. Orientation Assignment
+Calculates the orientation of each keypoint using the Intensity Centroid method.
+Makes ORB rotation invariant.
+
+
+
+4. BRIEF Descriptor Generation
+Uses Rotated BRIEF (rBRIEF) to generate descriptors.
+Produces a binary descriptor (typically 256 bits / 32 bytes).
+
+
+
+5. Keypoint Matching
+Matches descriptors between two images.
+Uses Hamming distance (instead of Euclidean distance).
+
+ORB Keypoint Detection:
+
+import cv2
+
+# Read image in grayscale
+img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
+
+# Create ORB detector
+orb = cv2.ORB_create()
+
+# Detect keypoints and compute descriptors
+keypoints, descriptors = orb.detectAndCompute(img, None)
+
+# Draw keypoints
+output = cv2.drawKeypoints(
+    img,
+    keypoints,
+    None,
+    flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+)
+
+# Display image
+cv2.imshow("ORB Keypoints", output)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# Print results
+print("Number of Keypoints:", len(keypoints))
+print("Descriptor Shape:", descriptors.shape)
+
+
+ORB Feature Matching Code
+
+import cv2
+
+# Read two images
+img1 = cv2.imread("image1.jpg", 0)
+img2 = cv2.imread("image2.jpg", 0)
+
+# Create ORB detector
+orb = cv2.ORB_create()
+
+# Detect keypoints and descriptors
+kp1, des1 = orb.detectAndCompute(img1, None)
+kp2, des2 = orb.detectAndCompute(img2, None)
+
+# Create Brute Force Matcher using Hamming distance
+bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+
+# Match descriptors
+matches = bf.match(des1, des2)
+
+# Sort matches by distance
+matches = sorted(matches, key=lambda x: x.distance)
+
+# Draw first 50 matches
+result = cv2.drawMatches(
+    img1, kp1,
+    img2, kp2,
+    matches[:50],
+    None,
+    flags=2
+)
+
+# Display result
+cv2.imshow("ORB Feature Matching", result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
